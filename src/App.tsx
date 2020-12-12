@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import QuestionCard from './components/QuetionComponent'
 import {fetchQuizQestions, Diffculty, QuestionState } from './api'
 
-type AnswerObject = {
+export type AnswerObject = {
   question: string;
   answer: string;
   correct: boolean;
@@ -58,7 +58,12 @@ const App = () => {
   }
 
   const nextQuestion = () => {
-    //
+    const nextQuestion = number + 1
+    if (nextQuestion == totalQuestion) {
+      setGameover(true)
+    } else {
+      setNumber(nextQuestion)
+    }
   }
 
   return (
@@ -71,7 +76,7 @@ const App = () => {
       ) : null}
       
      
-      {!gameover ? <p className="score">Score..</p> : null}
+      {!gameover ? <p className="score">Score: {score}</p> : null}
       {loading && <p>Loading Questions...</p>}
       {!loading && !gameover && (
         <QuestionCard
@@ -89,7 +94,6 @@ const App = () => {
 
       ): null}
 
-      <button onClick={checkAnser}>Chec</button>
 
     </div>
   );
